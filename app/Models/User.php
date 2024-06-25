@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Karyawan::class,'user_id','id');
     }
+
+    public function atasan()
+    {
+        return $this->belongsToMany(User::class,'atasan_user','user_id','atasan_id')->withPivot('level');
+    }
 }
