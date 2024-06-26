@@ -41,7 +41,7 @@ class UserDataTable extends DataTable
     {
         return $this->builder()
             ->parameters([
-                'delay' => 1000,
+                'delay' => 500,
                 'responsive' => [
                     'details' => [
                         'display'=> '$.fn.dataTable.Responsive.display.childRowImmediate',
