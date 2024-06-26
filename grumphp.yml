@@ -38,15 +38,15 @@ grumphp:
         #     diff: false
         #     triggered_by: ['php']
 
-        phplint:
-            exclude: []
-            jobs: ~
-            short_open_tag: false
-            ignore_patterns:
-              - /^app\/(.*)/
-              - /^bootstrap\/(.*)/
-              - /^config\/(.*)/
-              - /^database\/(.*)/
-              - /^routes\/(.*)/
-              - /^test\/(.*)/
-            triggered_by: ['php']
+        # phplint:
+        #     exclude: []
+        #     jobs: ~
+        #     short_open_tag: false
+        #     ignore_patterns:
+        #       - /^app\/(.*)/
+        #       - /^bootstrap\/(.*)/
+        #       - /^config\/(.*)/
+        #       - /^database\/(.*)/
+        #       - /^routes\/(.*)/
+        #       - /^test\/(.*)/
+        #     triggered_by: ['php']

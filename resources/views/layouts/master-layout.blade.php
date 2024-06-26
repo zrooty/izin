@@ -12,7 +12,7 @@
         crossorigin="anonymous" />
 
     @stack('css')  
-    @vite(['resourcces/js/app.js', 'resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
     @stack('jsModule')
 </head>
 

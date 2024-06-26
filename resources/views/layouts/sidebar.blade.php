@@ -27,6 +27,12 @@
                 <span class="text-uppercase">User Interface</span>
             </li>
             <li>
+                <a href="{{ url('users') }}" class="link">
+                    <i class="ti-user"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>
                     <span>UI Elements</span>
@@ -73,13 +79,13 @@
                     <li><a href="error-500.html" target="_blank" class="link"><span>Error 500</span></a></li>
                 </ul>
             </li>
-            <li class="active open">
+            <li class="">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-layers-alt"></i>
                     <span>Pages</span>
                 </a>
-                <ul class="sub-menu expand">
-                    <li class="active"><a href="pages-blank.html" class="link"><span>Blank</span></a></li>
+                <ul class="sub-menu">
+                    <li class=""><a href="pages-blank.html" class="link"><span>Blank</span></a></li>
                 </ul>
             </li>
             <li>
