@@ -22,7 +22,10 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('pages.user-form');
+        return view('pages.user-form',[
+            'action' => route('users.store'),
+            'data' => new User()
+        ]);
     }
 
     /**
@@ -30,7 +33,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json([
+            'status'=> 'success',
+        ]);
     }
 
     /**

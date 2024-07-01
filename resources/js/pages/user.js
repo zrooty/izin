@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import '../vendor/datatable'
-import { AjaxAction } from '../lib/utils'
+import { AjaxAction, HandleFormSubmit } from '../lib/utils'
 
 $('.main-content').on('click', '.action', function(e) {
 
@@ -10,7 +10,11 @@ $('.main-content').on('click', '.action', function(e) {
     
     (new AjaxAction(this))
     .onSuccess(function(res) {
-        console.log(res)
+        (new HandleFormSubmit())
+        .onSuccess(res => {
+
+        })
+        .init()
     })
     .execute()
 })

@@ -14,6 +14,8 @@ export default defineConfig({
                 ...files,
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/login.js',
+                
             ],
             refresh: true,
         }),
