@@ -1,8 +1,18 @@
+import iziToast from 'izitoast'
 import $ from 'jquery'
+import 'izitoast/dist/css/izitoast.min.css'
 
 
 const modalEl = $('#modalAction')
 
+export function showToast(type = 'success', message = 'Berhasil menyimpaan data'){
+    // console.log(message)
+    iziToast[type]({
+        title: 'Info',
+        message,
+        position: 'topRight'
+    })
+}
 class AjaxOption{
     successCb = null
     runDefaultSuccessCb = true
@@ -41,6 +51,7 @@ export class AjaxAction extends AjaxOption {
                     modalEl.modal('show')
 
                 }
+                
                 this.successCb && this.successCb(res)
             },
             error : err => {
@@ -82,17 +93,35 @@ export class HandleFormSubmit extends AjaxOption {
                 },
                 success: res => {
                     if (_this.runDefaultSuccessCb) {
-                        //defa
+                        modalEl.modal('hide')
+                        
                     }
-
+                    showToast(res?.message)
                     _this.successCb && _this.successCb(res)
                 },
                 error: err => {
                     if (_this.runDefaultErrorCb) {
+                        $('.is-invalid').removeClass('is-invalid')
+                        $('.invalid-feedback').remove()
+                        const message = err.responseJSON?.message
+                        const errors =err.responseJSON?.errors
 
+                        showToast('error', message)
+                        if (errors){
+                            let i =0
+                            for (let [key, value] of Object.entries(errors)){
+                                const input =$(`[name="${key}"]`)
+                                if (i==0){
+                                    input.focus()
+                                }
+                                // console.log(key, value)
+                                input.addClass('is-invalid').parents('.form-wrapper').append(`<div class="invalid-feedback">${value}</div>`)
+                                i++;
+                            }
+                        }
                     }
-
                     _this.errorCb && _this.errorCb(err)
+                    _this.button.attr('disabled', false).html(_this.buttonLabel)
                 },
                 complete: () => {
                     _this.button.attr('disabled', false).html(_this.buttonLabel)

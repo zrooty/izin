@@ -24,6 +24,7 @@
         "datatables.net-responsive": "^2.4.1",
         "datatables.net-responsive-bs5": "^2.4.1",
         "glob": "^10.4.2",
+        "izitoast": "^1.4.0",
         "jquery": "3.5.1",
         "perfect-scrollbar": "^1.5.0"
     }
