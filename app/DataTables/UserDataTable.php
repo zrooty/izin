@@ -22,8 +22,10 @@ class UserDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'user.action')
-            ->setRowId('id');
+            ->addColumn('action', function($row){
+
+            })
+            ->addIndexColumn();
     }
 
     /**
@@ -70,6 +72,8 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
+            Column::make('id')->hidden(),
             Column::make('nama'),
             Column::make('email'),
             Column::make('created_at'),
