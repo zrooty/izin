@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Divisi;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use PhpOffice\PhpSpreadsheet\Style\Supervisor;
 
 class UserkaryawanDivisiSeeder extends Seeder
 {
@@ -19,6 +20,16 @@ class UserkaryawanDivisiSeeder extends Seeder
             'active'=> '1',
         ]);
 
+        $finance = Divisi::create([
+            'nama'=> 'finance',
+            'active'=> '1',
+        ]);
+
+        $hrd = Divisi::create([
+            'nama'=> 'hrd',
+            'active'=> '1',
+        ]);
+
         $staff_it = User::factory()->create([
             'nama' => 'staff_it',
             'email' => 'staff_it@example.com',
@@ -29,9 +40,27 @@ class UserkaryawanDivisiSeeder extends Seeder
             'email' => 'supervisor_it@example.com',
         ]);
 
+        $supervisor_it->karyawan()->create([
+            'nama'=> $supervisor_it->nama,
+            'divisi_id' => $it->id,
+            'nama_divisi'=> $it->nama,
+            'status_karyawan'=> 'tetap',
+            'tanggal_masuk'=> now(),
+            'jenis_kelamin'=> 'L',
+        ]);
+
         $manager_it = User::factory()->create([
             'nama' => 'manager_it',
             'email' => 'manager_it@example.com',
+        ]);
+
+        $manager_it->karyawan()->create([
+            'nama'=> $manager_it->nama,
+            'divisi_id' => $it->id,
+            'nama_divisi'=> $it->nama,
+            'status_karyawan'=> 'tetap',
+            'tanggal_masuk'=> now(),
+            'jenis_kelamin'=> 'L',
         ]);
 
         $staff_it->atasan()->attach([
