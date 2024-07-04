@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\DataTables\UserDataTable;
 use App\Http\Requests\UserRequest;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -51,7 +52,7 @@ class UserController extends Controller
                 'nama_divisi' => $divisi->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'status_karyawan' => $request->status_karyawan,
-                'tanggal_masuk' => now(),
+                'tanggal_masuk' => (new DateTime($request->tanggal_masuk))->format('Y-m-d'),
                 
             ]);
 
