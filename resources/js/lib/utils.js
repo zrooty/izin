@@ -17,7 +17,7 @@ export function initDatepicker(selector = '.date', option = {}) {
     return date
 }
 
-export function showToast(type = 'success', message = 'Berhasil menyimpaan data'){
+export function showToast(type = 'success', message = 'Berhasil menyimpan data'){
     // console.log(message)
     iziToast[type]({
         title: 'Info',
@@ -114,7 +114,7 @@ export class HandleFormSubmit extends AjaxOption {
                         modalEl.modal('hide')
                         
                     }
-                    showToast(res?.message)
+                    showToast(res?.status)
                     _this.successCb && _this.successCb(res)
                     if (_this.datatableId){
                         window.LaravelDataTables[_this.datatableId].ajax.reload(null, false)

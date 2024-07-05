@@ -16,19 +16,19 @@
             <x-forms.input type="password" label="Password Confirmation" name="password_confirmation" />
         </div>
         <div class="col-md-12">
-            <x-forms.radio value="{{ $data->karyaman?->jenis_kelamin }}" :options="$jenisKelamin" label="Jenis kelamin" name="jenis_kelamin" />
+            <x-forms.radio value="{{ $data->karyawan?->jenis_kelamin }}" :options="$jenisKelamin" label="Jenis kelamin" name="jenis_kelamin" />
         </div>
         <div class="col-md-6">
             <x-forms.select name="divisi" label="Divisi">
                 @foreach ($divisi as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                    <option @selected($data->karyawan?->divisi_id == $item->id) value="{{ $item->id }}">{{ $item->nama }}</option>
                 @endforeach
             </x-forms.select>
         </div>
         <div class="col-md-6">
             <x-forms.select name="status_karyawan" label="Status karyawan">
                 @foreach (['Tetap' => 'tetap', 'Kontrak' => 'kontrak', 'Training' => 'training'] as $key => $value)
-                    <option value="{{ $value }}">{{ $key }}</option>
+                    <option @selected($data->karyawan?->status_karyawan == $value) value="{{ $value }}">{{ $key }}</option>
                 @endforeach
             </x-forms.select>
         </div>
@@ -49,7 +49,13 @@
                     <th>Level</th>
                 </thead>
                 <tbody id="listAtasan">
-
+                    @foreach ($data->atasan as $item)
+                        <tr>
+                            <td> <button class="btn btnsm btn-danger btn-delete"><i class="ti ti-trash"></i></button> {{ $item->nama }}</td>
+                            <td>{{ $item->email}}</td>
+                            <td> <input class="form-control" name="atasan[{{ $item->id }}]" value="{{ $item->pivot->level }}"/></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

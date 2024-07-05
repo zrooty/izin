@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         return [
             'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($this->user)],
             'password' => [Rule::requiredIf(function(){
                 return request()->routeIs('users.store');
             }), 'confirmed'],

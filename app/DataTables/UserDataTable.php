@@ -23,7 +23,7 @@ class UserDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
-
+                return '<button class="btn btn-primary btn-sm action" data-action="'.route('users.edit', $row->id).'">Edit</button>';
             })
             ->addIndexColumn();
     }
