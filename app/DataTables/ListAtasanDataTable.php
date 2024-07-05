@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class ListAtasanDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,9 +23,12 @@ class UserDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($row){
-
-            })
+        ->setRowClass('cursor-pointer')
+        ->setRowAttr([
+            'data-id'=> fn ($row) =>$row->id,
+            'data-nama' => fn ($row) => $row->nama,
+            'data-email' => fn ($row) => $row->email,
+        ])
             ->addIndexColumn();
     }
 
@@ -42,28 +46,20 @@ class UserDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->parameters([
-                'searchDelay' => 500,
-                'responsive' => [
-                    'details' => [
-                        'display'=> '$.fn.dataTable.Responsive.display.childRowImmediate',
-                    ]
-                ]
-            ])
-            ->setTableId('user-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            //->dom('Bfrtip')
-            ->orderBy(1)
-            ->selectStyleSingle();
-            // ->buttons([
-            //     Button::make('excel'),
-            //     Button::make('csv'),
-            //     Button::make('pdf'),
-            //     Button::make('print'),
-            //     Button::make('reset'),
-            //     Button::make('reload')
-            // ]);
+                    ->setTableId('listatasan-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    //->dom('Bfrtip')
+                    ->orderBy(1);
+                    // ->selectStyleSingle()
+                    // ->buttons([
+                    //     Button::make('excel'),
+                    //     Button::make('csv'),
+                    //     Button::make('pdf'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // ]);
     }
 
     /**
@@ -72,18 +68,11 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
-            Column::make('id')->hidden(),
+            Column::make('DT_RowIndex')->title("#")->searchable(false)->orderable(false),
             Column::make('nama'),
             Column::make('email'),
             Column::make('karyawan.nama_divisi')->name('karyawan.nama_divisi')->title('divisi'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+    
         ];
     }
 
@@ -92,6 +81,6 @@ class UserDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'User_' . date('YmdHis');
+        return 'ListAtasan_' . date('YmdHis');
     }
 }

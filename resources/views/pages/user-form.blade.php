@@ -35,5 +35,23 @@
         <div class="col-md-6">
             <x-forms.datepicker label="Tanggal masuk" name="tanggal_masuk" value="{{ $data->karyawan?->tanggal_masuk }}" />
         </div>
+
+        <hr class="mt-3 mb-3"/>
+        <div class="col-12">
+            <div class="mb-3">
+                <button type="button" class="btn btn-info add-atasan" data-action="{{ route('users.list-atasan') }}">Tambah Atasan</button>
+
+            </div>
+            <table class="table">
+                <thead>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Level</th>
+                </thead>
+                <tbody id="listAtasan">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </x-modal>
