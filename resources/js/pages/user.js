@@ -1,6 +1,17 @@
 import $ from 'jquery'
 import '../vendor/datatable'
-import { AjaxAction, confirmation, HandleFormSubmit, initDatepicker } from '../lib/utils'
+import { AjaxAction, confirmation, HandleFormSubmit, initDatepicker, reloadDataTable, showToast } from '../lib/utils'
+
+$('.main-content').on('click', '.action-delete', function(e) {
+    confirmation(res => {
+        (new AjaxAction(this))
+        .onSuccess(res => {
+            showToast(res.status, res.message)
+            reloadDataTable('user-table')
+        }, false)
+        .execute()
+    })
+})
 
 $('.main-content').on('click', '.action', function(e) {
 
@@ -10,7 +21,7 @@ $('.main-content').on('click', '.action', function(e) {
     
     (new AjaxAction(this))
     .onSuccess(function(res) {
-        initDatepicker();
+        initDatepicker()
 
         $('.add-atasan').on('click',  function() {
             (new AjaxAction(this))

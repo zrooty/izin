@@ -8,6 +8,16 @@ import Swal from  'sweetalert2'
 
 const modalEl = $('#modalAction')
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name=csrf_token]').attr('content')
+    }
+})
+
+export function reloadDataTable(id) {
+    window.LaravelDataTables[id]?.ajax.reload(null, false)
+}
+
 export function confirmation(cb, configs = {}) 
 {
     Swal.fire({
@@ -72,6 +82,7 @@ export class AjaxAction extends AjaxOption {
     execute() {
         $.ajax({
             url: this.el.data('action'),
+            method: this.el.data('method') ?? 'get',
             beforeSend: () => {
                 this.el.attr('disabled', true)
                 this.el.html('Loading...')

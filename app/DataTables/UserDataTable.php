@@ -23,7 +23,9 @@ class UserDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
-                return '<button class="btn btn-primary btn-sm action" data-action="'.route('users.edit', $row->id).'">Edit</button>';
+                $actions = '<div class="d-flex"><button class="btn btn-primary btn-sm action" data-action="'.route('users.edit', $row->id).'">Edit</button>';
+                $actions .= '<button class="btn btn-danger ms-1 btn-sm action-delete" data-method="delete" data-action="'.route('users.destroy', $row->id).'">Delete</button></div>';
+                return $actions;
             })
             ->addIndexColumn();
     }
