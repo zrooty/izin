@@ -51,12 +51,14 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            foreach ($request->atasan as $key => $value) {
-                $atasan[$key] = ['level' => $value];
-            }
-            if (isset($atasan)) {
-                $user->atasan()->attach($atasan);
-
+            if ($request->has('atasan')) {
+                foreach ($request->atasan as $key => $value) {
+                    $atasan[$key] = ['level' => $value];
+                }
+                if (isset($atasan)) {
+                    $user->atasan()->sync($atasan);
+    
+                }
             }
 
             $divisi = Divisi::find($request->divisi);
@@ -118,12 +120,14 @@ class UserController extends Controller
             $user->fill($validate);
             $user->save();
 
-            foreach ($request->atasan as $key => $value) {
-                $atasan[$key] = ['level' => $value];
-            }
-            if (isset($atasan)) {
-                $user->atasan()->sync($atasan);
-
+            if ($request->has('atasan')) {
+                foreach ($request->atasan as $key => $value) {
+                    $atasan[$key] = ['level' => $value];
+                }
+                if (isset($atasan)) {
+                    $user->atasan()->sync($atasan);
+    
+                }
             }
 
             $divisi = Divisi::find($request->divisi);
