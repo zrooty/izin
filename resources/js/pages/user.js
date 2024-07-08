@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import '../vendor/datatable'
-import { AjaxAction, HandleFormSubmit, initDatepicker } from '../lib/utils'
+import { AjaxAction, confirmation, HandleFormSubmit, initDatepicker } from '../lib/utils'
 
 $('.main-content').on('click', '.action', function(e) {
 
@@ -34,7 +34,13 @@ $('.main-content').on('click', '.action', function(e) {
             .execute();
         });
 
-        (new HandleFormSubmit())
+        $('.btn-delete').on('click', function() {
+            confirmation(() => {
+                $(this).parents('tr').remove()
+            }) 
+        })
+
+        const handle = (new HandleFormSubmit())
         .onSuccess(res => {
 
         })

@@ -39,7 +39,7 @@
         <hr class="mt-3 mb-3"/>
         <div class="col-12">
             <div class="mb-3">
-                <button type="button" class="btn btn-info add-atasan" data-action="{{ route('users.list-atasan') }}">Tambah Atasan</button>
+                <button type="button" class="btn btn-info add-atasan" data-action="{{ route('users.list-atasan').'?except='.$data->id }}">Tambah Atasan</button>
 
             </div>
             <table class="table">
@@ -51,7 +51,7 @@
                 <tbody id="listAtasan">
                     @foreach ($data->atasan as $item)
                         <tr>
-                            <td> <button class="btn btnsm btn-danger btn-delete"><i class="ti ti-trash"></i></button> {{ $item->nama }}</td>
+                            <td> <button type="button" class="btn btnsm btn-danger btn-delete me-1"><i class="ti ti-trash"></i></button> {{ $item->nama }}</td>
                             <td>{{ $item->email}}</td>
                             <td> <input class="form-control" name="atasan[{{ $item->id }}]" value="{{ $item->pivot->level }}"/></td>
                         </tr>

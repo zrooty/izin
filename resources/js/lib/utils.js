@@ -3,15 +3,34 @@ import $ from 'jquery'
 import 'izitoast/dist/css/izitoast.min.css'
 import 'bootstrap-datepicker'
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
-
+import Swal from  'sweetalert2'
+// import 'sweetalert2/src/sweetalert2.scss'
 
 const modalEl = $('#modalAction')
 
-export function initDatepicker(selector = '.date', option = {}) {
+export function confirmation(cb, configs = {}) 
+{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        ...configs
+      }).then((result) => {
+        if (result.isConfirmed) {
+          cb && cb(result)
+        }
+      });
+}
+
+export function initDatepicker(selector = '.date', options = {}) {
     const date = $(selector).datepicker({
         autoclose: true,
         todayHighlight: true,
-        // ...options
+        ...options
     })
 
     return date

@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function listAtasan(ListAtasanDataTable $listAtasanDataTable)
     {
-        return $listAtasanDataTable->render('pages.user-list-atasan');
+        return $listAtasanDataTable->with(['except' => request('except')])->render('pages.user-list-atasan');
     }
 
     /**
@@ -117,6 +117,14 @@ class UserController extends Controller
             }
             $user->fill($validate);
             $user->save();
+
+            foreach ($request->atasan as $key => $value) {
+                $atasan[$key] = ['level' => $value];
+            }
+            if (isset($atasan)) {
+                $user->atasan()->sync($atasan);
+
+            }
 
             $divisi = Divisi::find($request->divisi);
             $karyawan = $user->karyawan;
