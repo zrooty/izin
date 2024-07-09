@@ -26,13 +26,19 @@
             <li class="menu-category">
                 <span class="text-uppercase">User Interface</span>
             </li>
-            <li>
+            <li @class(['active' => Str::startsWith(request()->path(), 'users')])>
                 <a href="{{ url('users') }}" class="link">
                     <i class="ti-user"></i>
                     <span>Users</span>
                 </a>
             </li>
-            <li>
+            <li @class(['active' => Str::startsWith(request()->path(), 'divisi')])>
+                <a href="{{ url('divisi') }}" class="link">
+                    <i class="ti-book"></i>
+                    <span>Divisi</span>
+                </a>
+            </li>
+            {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>
                     <span>UI Elements</span>
@@ -122,7 +128,7 @@
                     <i class="ti-calendar"></i>
                     <span>Calendar</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav> 
