@@ -1,4 +1,4 @@
-@props(['id' => 'id-datepicker' .rand(), 'label' => null, 'format' => 'dd-mm-yyyy'])
+@props(['id' => 'id-datepicker' .rand(), 'label' => null, 'format' => 'yyyy-mm-dd'])
 
 <div class="mb-2 form-wrapper">
     @if ($label)

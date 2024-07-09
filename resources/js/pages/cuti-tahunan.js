@@ -7,7 +7,7 @@ $('.main-content').on('click', '.action-delete', function(e) {
         (new AjaxAction(this))
         .onSuccess(res => {
             showToast(res.status, res.message)
-            reloadDataTable('user-table')
+            reloadDataTable('cuti-tahunan-table')
         }, false)
         .execute()
     })
@@ -21,10 +21,14 @@ $('.main-content').on('click', '.action', function(e) {
     
     (new AjaxAction(this))
     .onSuccess(function(res) {
-        initDatepicker('.date')
+        initDatepicker('.date', {
+            minViewMode: 2,
+            format: 'yyyy',
+        })
 
-        $('.add-atasan').on('click',  function() {
-            (new AjaxAction(this))
+        $('#user_name').on('click', function(e) {
+            const _this = this;
+            const action = (new AjaxAction(this))
             .onSuccess(res => {
                 const modalEl = $('#modalSearch')
                 modalEl.html(res)
@@ -32,30 +36,17 @@ $('.main-content').on('click', '.action', function(e) {
                 
                 $('#listatasan-table').on('click', 'tr', function() {
                     modalEl.modal('hide')
-
-                    const atasan = `<tr>
-                    <td>${this.dataset.nama}</td>
-                    <td>${this.dataset.email}</td>
-                    <td><input class="form-control" placeholder="Level atasan" name="atasan[${this.dataset.id}]"/>
-                    </tr>`
-
-                    $('#listAtasan').prepend(atasan)
+                    _this.value = this.dataset.nama
+                    $('[nama=user_id').val(this.dataset.id)
                 });
             },false)
-            .execute();
-        });
-
-        $('.btn-delete').on('click', function() {
-            confirmation(() => {
-                $(this).parents('tr').remove()
-            }) 
+            .execute()
         })
 
         const handle = (new HandleFormSubmit())
         .onSuccess(res => {
-
         })
-        .reloadDataTable('user-table')
+        .reloadDataTable('cuti-tahunan-table')
         .init()
     })
     .execute()

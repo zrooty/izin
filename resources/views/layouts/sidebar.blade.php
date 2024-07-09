@@ -38,6 +38,12 @@
                     <span>Divisi</span>
                 </a>
             </li>
+            <li @class(['active' => Str::startsWith(request()->path(), 'cuti-tahunan')])>
+                <a href="{{ url('cuti-tahunan') }}" class="link">
+                    <i class="ti-book"></i>
+                    <span>Cuti Tahunan</span>
+                </a>
+            </li>
             {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>
