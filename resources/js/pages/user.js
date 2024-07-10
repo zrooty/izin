@@ -2,22 +2,30 @@ import $ from 'jquery'
 import '../vendor/datatable'
 import { AjaxAction, confirmation, HandleFormSubmit, initDatepicker, reloadDataTable, showToast } from '../lib/utils'
 
-$('.main-content').on('click', '.action-delete', function(e) {
-    confirmation(res => {
-        (new AjaxAction(this))
-        .onSuccess(res => {
-            showToast(res.status, res.message)
-            reloadDataTable('user-table')
-        }, false)
-        .execute()
-    })
-})
+// $('.main-content').on('click', '.action-delete', function(e) {
+//     confirmation(res => {
+//         (new AjaxAction(this))
+//         .onSuccess(res => {
+//             showToast(res.status, res.message)
+//             reloadDataTable('user-table')
+//         }, false)
+//         .execute()
+//     })
+// })
 
-$('.main-content').on('click', '.action', function(e) {
+$('.main-content').on('click', '[data-action]', function(e) {
 
-    if (!this.dataset.action) {
-        throw new Error('data attribute action must provide!')
-    }
+    if (this.dataset.method == 'delete') {
+        confirmation(res => {
+            (new AjaxAction(this))
+            .onSuccess(res => {
+                showToast(res.status, res.message)
+                reloadDataTable('user-table')
+            }, false)
+            .execute()
+        })
+        return
+    };
     
     (new AjaxAction(this))
     .onSuccess(function(res) {

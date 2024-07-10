@@ -23,9 +23,9 @@ class CutiTahunanDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($row){
-            $actions = '<div class="d-flex"><button class="btn btn-primary btn-sm action" data-action="'.route('cuti-tahunan.edit', $row->id).'">Edit</button>';
-            $actions .= '<button class="btn btn-danger ms-1 btn-sm action-delete" data-method="delete" data-action="'.route('cuti-tahunan.destroy', $row->id).'">Delete</button></div>';
-            return $actions;
+            $actions['Edit'] =['action' => route('cuti-tahunan.edit', $row->id)];
+            $actions['Delete'] =['action' => route('cuti-tahunan.destroy', $row->id), 'method' => 'delete'];
+            return view('action', compact('actions'));
         })
         ->editColumn('created_at', function($row){
             return $row->created_at->format('d-m-Y H:i');

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-3">
-                        <button class="btn btn-primary action" data-action="{{ route('cuti-tahunan.create') }}">Tambah</button>
+                        <button class="btn btn-primary" data-action="{{ route('cuti-tahunan.create') }}">Tambah</button>
                     </div>
                     {{$dataTable->table()}}
                 </div>

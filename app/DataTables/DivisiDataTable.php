@@ -23,9 +23,9 @@ class DivisiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
-                $actions = '<div class="d-flex"><button class="btn btn-primary btn-sm action" data-action="'.route('divisi.edit', $row->id).'">Edit</button>';
-                $actions .= '<button class="btn btn-danger ms-1 btn-sm action-delete" data-method="delete" data-action="'.route('divisi.destroy', $row->id).'">Delete</button></div>';
-                return $actions;
+                $actions['Edit'] =['action' => route('divisi.edit', $row->id)];
+                $actions['Delete'] =['action' => route('divisi.destroy', $row->id), 'method' => 'delete'];
+                return view('action', compact('actions'));
             })
             ->addIndexColumn();
     }
