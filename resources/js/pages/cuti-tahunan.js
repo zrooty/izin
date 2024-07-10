@@ -7,7 +7,7 @@ $('.main-content').on('click', '.action-delete', function(e) {
         (new AjaxAction(this))
         .onSuccess(res => {
             showToast(res.status, res.message)
-            reloadDataTable('cuti-tahunan-table')
+            reloadDataTable('cutitahunan-table')
         }, false)
         .execute()
     })
@@ -37,7 +37,7 @@ $('.main-content').on('click', '.action', function(e) {
                 $('#listatasan-table').on('click', 'tr', function() {
                     modalEl.modal('hide')
                     _this.value = this.dataset.nama
-                    $('[nama=user_id').val(this.dataset.id)
+                    $('[name=user_id]').val(this.dataset.id)
                 });
             },false)
             .execute()
@@ -46,7 +46,7 @@ $('.main-content').on('click', '.action', function(e) {
         const handle = (new HandleFormSubmit())
         .onSuccess(res => {
         })
-        .reloadDataTable('cuti-tahunan-table')
+        .reloadDataTable('cutitahunan-table')
         .init()
     })
     .execute()
