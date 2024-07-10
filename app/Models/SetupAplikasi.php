@@ -10,4 +10,8 @@ class SetupAplikasi extends Model
     use HasFactory;
 
     protected $table = 'setup_aplikasi';
+    protected $guarded = ['id'];
+    protected $casts = [
+        'hari_kerja'=> 'array'
+    ];
 }

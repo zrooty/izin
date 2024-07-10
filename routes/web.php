@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\CutiTahunanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CutiTahunanController;
+use App\Http\Controllers\SetupAplikasiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,7 @@ Route::middleware(['auth','verified'])->group(function() {
     Route::resource('users', UserController::class);
     Route::resource('divisi', DivisiController::class);
     Route::resource('cuti-tahunan', CutiTahunanController::class);
+    Route::resource('setup-aplikasi', SetupAplikasiController::class);
 });
 
 Route::middleware('auth')->group(function () {

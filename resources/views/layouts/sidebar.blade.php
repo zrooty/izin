@@ -44,6 +44,12 @@
                     <span>Cuti Tahunan</span>
                 </a>
             </li>
+            <li @class(['active' => Str::startsWith(request()->path(), 'setup-aplikasi')])>
+                <a href="{{ url('setup-aplikasi') }}" class="link">
+                    <i class="ti-book"></i>
+                    <span>Setup Aplikasi</span>
+                </a>
+            </li>
             {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Divisi;
+use App\Models\SetupAplikasi;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class DivisiDataTable extends DataTable
+class SetupAplikasiDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -33,9 +33,9 @@ class DivisiDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Divisi $model): QueryBuilder
+    public function query(SetupAplikasi $model): QueryBuilder
     {
-        return $model->active()->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -44,15 +44,7 @@ class DivisiDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->parameters([
-                        'searchDelay' => 500,
-                        'responsive' => [
-                            'details' => [
-                                'display'=> '$.fn.dataTable.Responsive.display.childRowImmediate',
-                            ]
-                        ]
-                    ])
-                    ->setTableId('divisi-table')
+                    ->setTableId('setupaplikasi-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -65,9 +57,9 @@ class DivisiDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
+            Column::make('DT_RowIndex')->title("#")->searchable(false)->orderable(false),
             Column::make('id')->hidden(),
-            Column::make('nama'),
+            Column::make('add your columns'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
@@ -83,6 +75,6 @@ class DivisiDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Divisi_' . date('YmdHis');
+        return 'SetupAplikasi_' . date('YmdHis');
     }
 }
