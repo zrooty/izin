@@ -20,7 +20,7 @@ Route::middleware(['auth','verified'])->group(function() {
     Route::resource('users', UserController::class);
     Route::resource('divisi', DivisiController::class);
     Route::resource('cuti-tahunan', CutiTahunanController::class);
-    Route::resource('setup-aplikasi', SetupAplikasiController::class);
+    Route::resource('setup-aplikasi', SetupAplikasiController::class)->except(['destroy']);
 });
 
 Route::middleware('auth')->group(function () {

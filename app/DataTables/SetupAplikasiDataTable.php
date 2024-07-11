@@ -24,9 +24,16 @@ class SetupAplikasiDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
                 $actions['Edit'] =['action' => route('setup-aplikasi.edit', $row->id)];
-                $actions['Delete'] =['action' => route('setup-aplikasi.destroy', $row->id), 'method' => 'delete'];
                 return view('action', compact('actions'));
             })
+            ->editColumn('hari_kerja', function($row){
+                $item = '';
+                foreach($row->hari_kerja as $hariLibur){
+                    $item .= '<span class="me-1 badge bg-primary">'.$hariLibur.'</span>';
+                }
+                return $item;
+            })
+            ->rawColumns(['actions', 'hari_kerja'])
             ->addIndexColumn();
     }
 
@@ -59,7 +66,8 @@ class SetupAplikasiDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title("#")->searchable(false)->orderable(false),
             Column::make('id')->hidden(),
-            Column::make('add your columns'),
+            Column::make('hmin_cuti'),
+            Column::make('hari_kerja'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
