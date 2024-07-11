@@ -173,7 +173,11 @@ export class HandleFormSubmit extends AjaxOption {
                         if (errors){
                             let i =0
                             for (let [key, value] of Object.entries(errors)){
-                                const input =$(`[name="${key}"]`)
+                                let input =$(`[name="${key}"]`)
+
+                                if (!input.length){
+                                    input = $(`[name="${key}[]"]`)
+                                }
                                 if (i==0){
                                     input.focus()
                                 }
