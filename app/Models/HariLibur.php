@@ -9,4 +9,5 @@ class HariLibur extends Model
 {
     use HasFactory;
     protected $table = 'hari_libur';
+    protected $guarded = ['id'];
 }

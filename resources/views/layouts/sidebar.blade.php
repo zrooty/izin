@@ -46,8 +46,14 @@
             </li>
             <li @class(['active' => Str::startsWith(request()->path(), 'setup-aplikasi')])>
                 <a href="{{ url('setup-aplikasi') }}" class="link">
-                    <i class="ti-book"></i>
+                    <i class="ti-settings"></i>
                     <span>Setup Aplikasi</span>
+                </a>
+            </li>
+            <li @class(['active' => Str::startsWith(request()->path(), 'hari-libur')])>
+                <a href="{{ url('hari-libur') }}" class="link">
+                    <i class="ti-calendar"></i>
+                    <span>Hari Libur</span>
                 </a>
             </li>
             {{-- <li>

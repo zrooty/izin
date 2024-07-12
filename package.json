@@ -17,9 +17,16 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@fullcalendar/bootstrap5": "^6.1.14",
+        "@fullcalendar/core": "^6.1.14",
+        "@fullcalendar/daygrid": "^6.1.14",
+        "@fullcalendar/interaction": "^6.1.14",
+        "@fullcalendar/list": "^6.1.14",
+        "@fullcalendar/timegrid": "^6.1.14",
         "@popperjs/core": "^2.11.7",
         "bootstrap": "^5.2.3",
         "bootstrap-datepicker": "^1.9.0",
+        "bootstrap-icons": "^1.11.3",
         "datatables.net": "^1.10.24",
         "datatables.net-bs5": "^1.13.4",
         "datatables.net-fixedheader": "^3.1.8",

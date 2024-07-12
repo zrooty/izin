@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CutiTahunanController;
+use App\Http\Controllers\HariLiburController;
 use App\Http\Controllers\SetupAplikasiController;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware(['auth','verified'])->group(function() {
     Route::resource('divisi', DivisiController::class);
     Route::resource('cuti-tahunan', CutiTahunanController::class);
     Route::resource('setup-aplikasi', SetupAplikasiController::class)->except(['destroy']);
+    Route::resource('hari-libur', HariLiburController::class)->except(['destroy']);
 });
 
 Route::middleware('auth')->group(function () {
