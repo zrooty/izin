@@ -10,4 +10,14 @@ class HariLibur extends Model
     use HasFactory;
     protected $table = 'hari_libur';
     protected $guarded = ['id'];
+
+    public function scopeActive($query)
+    {
+        return $query->where(function($query) {
+            $query = $query->orWhere(function($query){
+                $query->whereDate('tanggal_akhir', '>=', request('start'))
+                ->whereDate('tanggal_awal','<=', request('end'));
+            });
+        });
+    }
 }
