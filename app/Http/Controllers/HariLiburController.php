@@ -18,7 +18,7 @@ class HariLiburController extends Controller
                 return [
                     'id'=> $item->id,
                     'start'=> $item->tanggal_awal,
-                    'end'=> $item->tanggal_akhir,
+                    'end'=> $item->tanggal_akhir->addDay(),
                     'title' => $item->nama,
                     'textColor' => '#842029',
                     'backgroundColor' => '#f8d7da',
@@ -69,15 +69,21 @@ class HariLiburController extends Controller
      */
     public function edit(HariLibur $hariLibur)
     {
-        //
+        return view('pages.hari-libur-form', [
+            'action' => route('hari-libur.update', $hariLibur->id),
+            'data'=> $hariLibur
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HariLibur $hariLibur)
+    public function update(HariLiburRequest $request, HariLibur $hariLibur)
     {
-        //
+        $request->fillData($hariLibur);
+        $hariLibur->save();
+
+        return responseSuccess();
     }
 
     /**

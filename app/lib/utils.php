@@ -33,3 +33,9 @@ if (!function_exists('responseError'))
         ], 500);
     }
 }
+
+if (!function_exists('convertDate')) {
+    function convertDate($date, $format = 'd-m-Y'): string {
+        return date_create($date)->format($format);
+    }
+}

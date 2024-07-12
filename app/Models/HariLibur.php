@@ -10,6 +10,10 @@ class HariLibur extends Model
     use HasFactory;
     protected $table = 'hari_libur';
     protected $guarded = ['id'];
+    protected $casts = [
+        'tanggal_awal'=> 'date',
+        'tanggal_akhir'=> 'date',
+    ];
 
     public function scopeActive($query)
     {
