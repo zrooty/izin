@@ -2,18 +2,19 @@
 
 namespace App\Http\Requests;
 
+use App\Models\HariLibur;
 use Illuminate\Foundation\Http\FormRequest;
 
 class HariLiburRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function fillData(HariLibur $hariLibur)
     {
-        return false;
+        $hariLibur->fill([
+            'tanggal_awal' => date_create($this->tanggal_awal)->format('Y-m-d'),
+            'tanggal_akhir' => date_create($this->tanggal_akhir)->format('Y-m-d'),
+            'nama' => $this->nama,
+        ]);
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +23,9 @@ class HariLiburRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tanggal_awal' => 'required|date:d-m-Y',
+            'tanggal_akhir' => 'required|date:d-m-Y',
+            'nama'=> 'required',
         ];
     }
 }
