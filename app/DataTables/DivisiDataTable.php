@@ -23,8 +23,8 @@ class DivisiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
-                $actions['Edit'] =['action' => route('setup-aplikasi.edit', $row->id)];
-                $actions['Delete'] =['action' => route('setup-aplikasi.destroy', $row->id), 'method' => 'delete'];
+                $actions['Edit'] =['action' => route('divisi.edit', $row->id)];
+                $actions['Delete'] =['action' => route('divisi.destroy', $row->id), 'method' => 'delete'];
                 return view('action', compact('actions'));
             })
             ->addIndexColumn();

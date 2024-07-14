@@ -85,16 +85,23 @@ class AjaxOption{
     }
 }
 export class AjaxAction extends AjaxOption {
+    options = {}
     constructor(el) {
         super()
         this.el = $(el)
         this.label = this.el.html()
     }
 
+    setOption(_option) {
+        this.options = _option
+        return this
+    }
+
     execute() {
         $.ajax({
             url: this.el.data('action'),
             method: this.el.data('method') ?? 'get',
+            ...this.options,
             beforeSend: () => {
                 this.el.attr('disabled', true)
                 this.el.html('Loading...')

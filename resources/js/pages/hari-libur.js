@@ -5,7 +5,28 @@ import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import interactionPlugin from '@fullcalendar/interaction';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import { AjaxAction, HandleFormSubmit, initDatepicker } from '../lib/utils';
+import { AjaxAction, HandleFormSubmit, initDatepicker, showToast } from '../lib/utils';
+
+function handleResizeAndDrop({ event }) {
+  const el = document.createElement('button');
+  el.setAttribute('data-action', window.location.origin + `/hari-libur/${event.id}`)
+  el.setAttribute('data-method', 'put')
+  el.innerText = 'Update';
+
+  (new AjaxAction(el))
+    .onSuccess(res => {
+      showToast(res.status, res.message)
+    }, false)
+    .setOption({
+      data: {
+        tanggal_awal: event.startStr,
+        tanggal_akhir: event.endStr,
+        nama: event.title,
+        ref: 'modify'
+      }
+    })
+    .execute()
+}
 
 let calendarEl = document.getElementById('calendar');
 let calendar = new Calendar(calendarEl, {
@@ -14,11 +35,14 @@ let calendar = new Calendar(calendarEl, {
   initialView: 'dayGridMonth',
   editable: true,
   droppable: true,
+  eventResizableFromStart: true,
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,listWeek'
   },
+  eventDrop: handleResizeAndDrop,
+  eventResize: handleResizeAndDrop,
   eventClick: (({event}) => {
     const el = document.createElement('button')
     el.setAttribute('data-action', window.location.origin + `/hari-libur/${event.id}/edit`)
