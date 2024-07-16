@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DivisiController;
@@ -23,6 +24,9 @@ Route::middleware(['auth','verified'])->group(function() {
     Route::resource('cuti-tahunan', CutiTahunanController::class);
     Route::resource('setup-aplikasi', SetupAplikasiController::class)->except(['destroy']);
     Route::resource('hari-libur', HariLiburController::class)->except(['destroy']);
+    Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan'], function(){
+        Route::resource('cuti', CutiController::class)->except(['destroy']);
+    });
 });
 
 Route::middleware('auth')->group(function () {

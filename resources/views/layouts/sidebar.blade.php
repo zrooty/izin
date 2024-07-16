@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="menu-category">
-                <span class="text-uppercase">User Interface</span>
+                <span class="text-uppercase">Konfigurasi</span>
             </li>
             <li @class(['active' => Str::startsWith(request()->path(), 'users')])>
                 <a href="{{ url('users') }}" class="link">
@@ -34,13 +34,13 @@
             </li>
             <li @class(['active' => Str::startsWith(request()->path(), 'divisi')])>
                 <a href="{{ url('divisi') }}" class="link">
-                    <i class="ti-book"></i>
+                    <i class="ti-package"></i>
                     <span>Divisi</span>
                 </a>
             </li>
             <li @class(['active' => Str::startsWith(request()->path(), 'cuti-tahunan')])>
                 <a href="{{ url('cuti-tahunan') }}" class="link">
-                    <i class="ti-book"></i>
+                    <i class="ti-layers-alt"></i>
                     <span>Cuti Tahunan</span>
                 </a>
             </li>
@@ -55,6 +55,18 @@
                     <i class="ti-calendar"></i>
                     <span>Hari Libur</span>
                 </a>
+            </li>
+            <li class="menu-category">
+                <span class="text-uppercase">Transaksi</span>
+            </li>
+            <li @class(['active open' => Str::startsWith(request()->path(), 'pengajuan')])>
+                <a href="#" class="main-menu has-dropdown">
+                    <i class="ti-check-box"></i>
+                    <span>Pengajuan</span>
+                </a>
+                <ul @class(['sub-menu', 'expand' => Str::startsWith(request()->path(), 'pengajuan')])>
+                <li @class(['active' => Str::startsWith(request()->path(), 'pengajuan/cuti')])><a href="{{ url('pengajuan/cuti' )}}" class="link"><span>Cuti</span></a></li>
+                </ul>
             </li>
             {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
