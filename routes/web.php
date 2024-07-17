@@ -24,7 +24,7 @@ Route::middleware(['auth','verified'])->group(function() {
     Route::resource('cuti-tahunan', CutiTahunanController::class);
     Route::resource('setup-aplikasi', SetupAplikasiController::class)->except(['destroy']);
     Route::resource('hari-libur', HariLiburController::class)->except(['destroy']);
-    Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan'], function(){
+    Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function() {
         Route::resource('cuti', CutiController::class)->except(['destroy']);
     });
 });

@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\DataTables\CutiDataTable;
 use App\Models\Cuti;
+use App\Services\CutiService;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
 {
+    public function __construct(private CutiService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +26,12 @@ class CutiController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.pengajuan.cuti-form', [
+            'action' => route('pengajuan.cuti.store'),
+            'data' => new Cuti(),
+            'hmin' => $this->service->hmin(setupAplikasi('hmin_cuti')),
+            'sisaCuti' => user()->cutiTahunanActive->sisa_cuti
+        ]);
     }
 
     /**

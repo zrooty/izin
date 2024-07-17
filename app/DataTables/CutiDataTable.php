@@ -14,6 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class CutiDataTable extends DataTable
 {
+    use DataTableHelper;
     /**
      * Build the DataTable class.
      *
@@ -22,8 +23,10 @@ class CutiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'cuti.action')
-            ->setRowId('id');
+            ->addColumn('action', function($row) {
+                
+            })
+            ->addIndexColumn();
     }
 
     /**
@@ -39,21 +42,7 @@ class CutiDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
-        return $this->builder()
-                    ->setTableId('cuti-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+        return $this->setHtml('cuti-table');
     }
 
     /**
@@ -61,17 +50,12 @@ class CutiDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
+        return $this->setColumns([
+            Column::make('tanggal_awal'),
+            Column::make('tanggal_akhir'),
+            Column::make('total_cuti')
+        ]);
+        
     }
 
     /**
